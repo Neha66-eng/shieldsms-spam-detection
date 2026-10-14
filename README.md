@@ -1,98 +1,117 @@
-# SmartSMS Shield: An MLOps-Enabled SMS Spam Detection System Using Multinomial Naive Bayes
 
-## Project overview
-SmartSMS Shield classifies an SMS message as **Spam** or **Ham (legitimate)** using a scikit-learn pipeline with TF-IDF features and Multinomial Naive Bayes. It includes data preparation, model evaluation, a Streamlit UI, automated tests, and deployment guidance.
+# ShieldSMS: ML-Based SMS Spam Detection
 
-## Technologies
-- Python 3.10+
-- pandas, scikit-learn, joblib
+## 1. Project Description
+
+ShieldSMS is a machine learning web application that classifies SMS messages as Spam or Ham (legitimate). It uses TF-IDF text features and a Multinomial Naive Bayes classifier. The Streamlit interface allows users to enter a message and view the predicted class and estimated spam probability.
+
+## 2. Technologies and Tools Used
+
+- Python
+- pandas
+- scikit-learn
+- TF-IDF Vectorizer
+- Multinomial Naive Bayes
+- joblib
 - Streamlit
 - pytest
 - Git and GitHub
-- Optional deployment: AWS or Google Cloud
+- Docker
 
-## Dataset
-Use the UCI SMS Spam Collection dataset:
-https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+## 3. Dataset
 
-Download the dataset from UCI and place the extracted `SMSSpamCollection` file in `data/SMSSpamCollection`.
-The training script also accepts a tab-separated file with two columns: label (`ham`/`spam`) and message text.
+The project uses the UCI SMS Spam Collection dataset.
 
-## Project structure
+Dataset source: https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+
+## 4. Project Features
+
+- SMS spam and legitimate-message classification
+- Text preprocessing and TF-IDF feature extraction
+- Machine learning model training and evaluation
+- Precision, recall, F1-score and confusion matrix
+- Estimated spam probability
+- Interactive Streamlit web interface
+
+## 5. Project Structure
+
 ```text
-SmartSMS_Shield_MLOps/
+SmartSMS_Shield_MLOps_starter/
 ├── app.py
-├── train.py
 ├── predict.py
+├── train.py
 ├── requirements.txt
 ├── Dockerfile
-├── .gitignore
 ├── data/
-│   └── README.md
 ├── models/
-│   └── .gitkeep
-├── tests/
-│   └── test_predict.py
-└── README.md
+├── reports/
+└── tests/
 ```
 
-## Run locally (Windows CMD)
-1. Install Python 3.10 or newer.
-2. Open CMD in this project folder.
-3. Create and activate a virtual environment:
-   ```bat
-   py -m venv .venv
-   .venv\\Scripts\\activate
-   ```
-4. Install dependencies:
-   ```bat
-   python -m pip install --upgrade pip
-   pip install -r requirements.txt
-   ```
-5. Download/extract the UCI dataset and place `SMSSpamCollection` in the `data` folder.
-6. Train and evaluate:
-   ```bat
-   python train.py
-   ```
-   This creates `models/sms_spam_pipeline.joblib` and `reports/metrics.json`.
-7. Start the app:
-   ```bat
-   streamlit run app.py
-   ```
-8. Run tests:
-   ```bat
-   pytest -q
-   ```
+## 6. Installation and Setup
 
-## Model and evaluation
-The pipeline uses `TfidfVectorizer` plus `MultinomialNB`. The training script creates a stratified train/test split and reports accuracy, precision, recall, F1-score, and a confusion matrix. Do not claim results until you run the script on the selected dataset.
+### Prerequisites
 
-## MLOps practices demonstrated
-- Reproducible split with a fixed random seed
-- Training and evaluation script separated from the UI
-- Saved model pipeline for inference
-- Automated unit tests
-- Git-based version control
-- Containerization with Docker
-- Deployment documentation
+- Python 3.10 or later
+- pip
 
-## GitHub
-Create a new repository named `SmartSMS-Shield-MLOps`, then run:
+### Install dependencies
+
 ```bash
-git init
-git add .
-git commit -m "Initial SmartSMS Shield MLOps project"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/SmartSMS-Shield-MLOps.git
-git push -u origin main
+python -m venv .venv
 ```
-Replace `YOUR-USERNAME` with your GitHub username.
 
-## Deployment URLs
-- **AWS deployment URL:** Add the public URL after deploying the app to an AWS service (for example, App Runner or an EC2 instance).
-- **GCP deployment URL:** Add the public URL after deploying the app to Google Cloud Run.
+Activate the environment on Windows PowerShell:
 
-Do not invent URLs. If your faculty expects both URLs, ask whether both cloud deployments are compulsory or whether one live deployment plus a documented second-cloud plan is acceptable. Cloud services may require billing setup.
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
 
-## Limitations
-This is a student demonstration, not a production-grade spam filter. It may misclassify messages, especially messages in languages or styles poorly represented in the dataset. Avoid entering private or sensitive SMS messages into a public demo.
+Install the dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Prepare the dataset
+
+Download the UCI SMS Spam Collection dataset and place the extracted `SMSSpamCollection` file inside the project's `data/` directory.
+
+### Train the model
+
+```bash
+python train.py
+```
+
+### Test an SMS message in the terminal
+
+```bash
+python predict.py
+```
+
+### Run the web application
+
+```bash
+python -m streamlit run app.py
+```
+
+Open the local URL displayed in the terminal, usually http://localhost:8501.
+
+## 7. Model Evaluation
+
+The initial evaluation produced these results:
+
+- Spam precision: 100%
+- Spam recall: 73.44%
+- Spam F1-score: 84.68%
+
+These results are specific to the evaluation dataset. The model may make incorrect predictions on new messages.
+
+## 8. Deployment URLs
+
+- AWS deployment URL: Pending deployment
+- Google Cloud Platform (GCP) deployment URL: Pending deployment
+
+## 9. Author
+
+Student project developed for practical learning in machine learning, MLOps and cloud deployment.
